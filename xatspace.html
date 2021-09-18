@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        html, body{width:100%; height:100%;}
+        body{margin:0px; overflow:hidden;}
+
+        h1{
+        font-family: 'Blaze';
+        color:#ec68ef;
+        font-weight:normal;
+        text-align:left;
+        position:absolute;
+        z-index:1;
+        font-size: 70px;
+        margin-top:50px;
+        left:3%;
+        display:inline-block;
+        -webkit-transform: rotate(-20deg);
+            -moz-transform: rotate(-20deg);
+            -ms-transform: rotate(-20deg);
+            -o-transform: rotate(-20deg);
+                transform: rotate(-20deg); 
+        
+        }
+
+
+        /*  Perspective grid floor */
+        #floor{
+        width:250%;
+        height:100%;
+        position:relative;
+        overflow:hidden;  
+        -webkit-transform: perspective( 20px );
+        -moz-transform: perspective( 20px );
+        -ms-transform: perspective( 20px );
+        transform: perspective( 20px );
+        
+        left:-75%;
+        padding-top:266px;
+        }
+        .floorInner{
+        width:100%;
+        height:100%;  
+        -webkit-transform: perspective( 28px ) rotateY( 0deg ) rotatex( 3deg);
+        -moz-transform: perspective( 28px ) rotateY( 0deg ) rotatex( 3deg);
+        -ms-transform: perspective( 28px ) rotateY( 0deg ) rotatex( 3deg);
+        transform: perspective( 28px ) rotateY( 0deg ) rotatex( 3deg);
+        }
+        ul{
+        position: absolute;
+        top:0px; 
+        left:0px;
+        list-style-type:none;
+        margin:0px;
+        padding:0px;
+        height:100%;
+        width:100%;
+        }
+        ul li{
+        display: block;
+        height:10%;
+        }
+        ul li:last-child{box-shadow:none;}
+        ul.horizontal li{box-shadow:inset 0px 2px 0px #d358bf;}
+
+
+
+        /*  Moving Floor */
+        ul.vertical li{
+        float: left;
+        width:10%;
+        box-shadow:inset -2px 0px 0px #d358bf;
+        height:100%;  
+        animation: slideleft 6s; 
+        animation-iteration-count: infinite;
+        -webkit-animation: slideleft 6s; 
+        -webkit-animation-iteration-count: infinite; 
+        animation-timing-function:linear;
+        -webkit-animation-timing-function:linear; 
+        }
+        
+        @keyframes slideleft { 
+        0%   { 
+            -webkit-transform: translate(0%); 
+            -moz-transform: translate(0%); 
+            -ms-transform: translate(0%); 
+            transform: translate(0%);   
+        } 
+        100% { 
+            -webkit-transform: translate(100%); 
+            -moz-transform: translate(100%); 
+            -ms-transform: translate(100%); 
+            transform: translate(100%);
+        } 
+        }
+        @-webkit-keyframes slideleft {
+        0%   { 
+            -webkit-transform: translate(0%); 
+            -moz-transform: translate(0%); 
+            -ms-transform: translate(0%); 
+            transform: translate(0%);   
+        } 
+        100% { 
+            -webkit-transform: translate(100%); 
+            -moz-transform: translate(100%); 
+            -ms-transform: translate(100%); 
+            transform: translate(100%);
+        } 
+        }
+        @-moz-keyframes slideleft {
+        0%   { 
+            -webkit-transform: translate(0%); 
+            -moz-transform: translate(0%); 
+            -ms-transform: translate(0%); 
+            transform: translate(0%);   
+        } 
+        100% { 
+            -webkit-transform: translate(100%); 
+            -moz-transform: translate(100%); 
+            -ms-transform: translate(100%); 
+            transform: translate(100%);
+        } 
+        }
+
+        /* Moving Terrain - need to redo using translate */
+        .mountain:before{
+        content:' ';
+        background:transparent;
+        width:300px;
+        height:300px;
+        position:absolute;
+        top:-100px;
+        left:35%;
+        border-radius:50%;
+        z-index:-1;
+        box-shadow: inset 0px 0px 100px 10px rgba(243,107,245,0.3), 0px -29px 90px 0px #f36bf5;
+        }
+
+        .mountain{
+        height:180px;
+        padding-top:30px;
+        position:absolute;
+        top:28%;
+        left:-15%;
+        width:115%;
+        min-width:1932px;
+        background:url(https://s.cdpn.io/21555/mountain_2.svg);
+        background-repeat: repeat-x;  
+        animation: slowLeft 200s; 
+        animation-iteration-count: infinite;
+        -webkit-animation: slowLeft 200s;
+        -webkit-animation-iteration-count: infinite; 
+        animation-timing-function:linear;
+        -webkit-animation-timing-function:linear;
+        
+        -webkit-transform: translate3d(0,0,0);
+            -webkit-backface-visibility: hidden;
+        }
+
+        @keyframes slowLeft { 
+        0%   { background-position:0px 0px ;} 
+        100% { background-position:1932px 0px ;} 
+        }
+        @-webkit-keyframes slowLeft { 
+        0%   { background-position:0px 0px ;} 
+        100% { background-position:1932px 0px ;} 
+        }
+
+
+        /*  background gradient */
+        body{
+        background: rgb(41,55,143);
+        background: -moz-linear-gradient(-45deg,  rgb(41,55,143) 0%, rgb(61,50,102) 31%, rgb(92,30,79) 67%, rgb(20,3,39) 100%);
+        background: -webkit-gradient(linear, left top, right bottom, color-stop(0%,rgb(41,55,143)), color-stop(31%,rgb(61,50,102)), color-stop(67%,rgb(92,30,79)), color-stop(100%,rgb(20,3,39)));
+        background: -webkit-linear-gradient(-45deg,  rgb(41,55,143) 0%,rgb(61,50,102) 31%,rgb(92,30,79) 67%,rgb(20,3,39) 100%);
+        background: -o-linear-gradient(-45deg,  rgb(41,55,143) 0%,rgb(61,50,102) 31%,rgb(92,30,79) 67%,rgb(20,3,39) 100%);
+        background: -ms-linear-gradient(-45deg,  rgb(41,55,143) 0%,rgb(61,50,102) 31%,rgb(92,30,79) 67%,rgb(20,3,39) 100%);
+        background: linear-gradient(135deg,  rgb(41,55,143) 0%,rgb(61,50,102) 31%,rgb(92,30,79) 67%,rgb(20,3,39) 100%);
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#29378f', endColorstr='#140327',GradientType=1 );
+
+        }
+
+        /*  Smokey static background */
+        .smoke {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 20%;
+        height: 20%;  
+        background-image: url(https://s.cdpn.io/21555/smoke.gif);
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: 50% 50%;  
+        -webkit-filter:blur(3px) brightness(0.5);
+        -webkit-transform-origin: top left;
+        -webkit-transform: scale(5);
+        opacity:0.3;
+        }
+        .static{
+        z-index:-1;
+        position:absolute;
+        content:' ';
+        width:20%;
+        height:20%;
+        background-image: url(https://s.cdpn.io/21555/static.gif);
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: 50% 50%;  
+        -webkit-filter: brightness(0.2);
+        -webkit-transform-origin: top left;
+        -webkit-transform: scale(5);
+        opacity:0.15;
+        
+        }
+
+
+        /* lightning */
+        .lightning{
+        z-index:1;
+        position:absolute;
+        width:100%;
+        min-height:635px;
+        left:5%;
+        background:transparent url(https://s.cdpn.io/21555/lightning_1.png) no-repeat;
+        animation: flash 7s; 
+        animation-iteration-count: infinite;
+        -webkit-animation: flash 7s;
+        -webkit-animation-iteration-count: infinite; 
+        animation-timing-function:linear;
+        -webkit-animation-timing-function:linear;
+        }
+
+        @keyframes flash { 
+        0%   { opacity:0.0;} 
+        2%   { opacity:1.0;}   
+        3%   { opacity:0.5;} 
+        4%   { opacity:0.2;} 
+        10%  { opacity:0.0;} 
+        100% { opacity:0.0;}
+        }
+        @-webkit-keyframes flash {
+        0%   { opacity:0.0;} 
+        2%   { opacity:1.0;}   
+        3%   { opacity:0.5;} 
+        4%   { opacity:0.2;} 
+        10%  { opacity:0.0;} 
+        100% { opacity:0.0;} 
+        }
+
+
+
+        /*  webfont */
+        @font-face {
+            font-family: 'Blaze';
+            src: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/21555/blaze-itc-tt.eot');
+            src: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/21555/blaze-itc-tt.eot') format('embedded-opentype'),
+                url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/21555/blaze-itc-tt.woff') format('woff'),
+                url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/21555/blaze-itc-tt_1.svg') format('truetype'),
+                url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/21555/blaze-itc-tt_1.svg#BlazeITCTTRegular') format('svg');
+        font-weight:normal;
+        }
+
+
+
+        /*  Paul Hayes 3d tetrahedron */
+        .pyramidWrap{
+        position:absolute;
+        width:100%;
+        height:100%;
+        top:20%;
+        }
+
+        #pyramid {
+            position: relative;
+            margin: 100px auto;
+            height: 500px;
+            width: 100px;
+            -webkit-transform-style: preserve-3d;
+            -webkit-animation: spin 10s linear infinite;
+            -webkit-transform-origin: 116px 200px 116px;
+
+            -moz-transform-style: preserve-3d;
+            -moz-animation: spin 10s linear infinite;
+            -moz-transform-origin: 116px 200px 116px;
+
+            -ms-transform-style: preserve-3d;
+            -ms-animation: spin 10s linear infinite;
+            -ms-transform-origin: 116px 200px 116px;
+
+            transform-style: preserve-3d;
+            animation: spin 10s linear infinite;
+            transform-origin: 116px 200px 116px;
+
+        }
+
+        @-webkit-keyframes spin {
+        from {
+            -webkit-transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+        }
+        to {
+            -webkit-transform: rotateX(360deg) rotateY(360deg) rotateZ(360deg);
+        }
+        }
+
+        @-moz-keyframes spin {
+        from {
+            -moz-transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+        }
+        to {
+            -moz-transform: rotateX(360deg) rotateY(360deg) rotateZ(360deg);
+        }
+        }
+
+        @-ms-keyframes spin {
+        from {
+            -ms-transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+        }
+        to {
+            -ms-transform: rotateX(360deg) rotateY(360deg) rotateZ(360deg);
+        }
+        }
+
+        @keyframes spin {
+        from {
+            transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+        }
+        to {
+            transform: rotateX(360deg) rotateY(360deg) rotateZ(360deg);
+        }
+        }
+
+        #pyramid > div {
+            position: absolute;
+            border-style: solid;
+            border-width: 200px 0 200px 346px;
+            -webkit-transform-origin: 0 0;
+            -moz-transform-origin:    0 0;
+            -ms-transform-origin:     0 0;
+            transform-origin:         0 0;
+        }
+
+        /* Put some text on each face */
+        #pyramid > div:after {
+            position: absolute;
+            color: #fff;
+            left: -250px;
+            text-align: center;
+        }
+
+        #pyramid > div:first-child  {
+            border-color: transparent transparent transparent rgba(243,107,245,0.6);
+            -webkit-transform: rotateY(-19.5deg) rotateX(180deg) translateY(-400px);
+            -moz-transform:    rotateY(-19.5deg) rotateX(180deg) translateY(-400px);
+            -ms-transform:     rotateY(-19.5deg) rotateX(180deg) translateY(-400px);
+            transform:         rotateY(-19.5deg) rotateX(180deg) translateY(-400px);
+        }
+
+        #pyramid > div:nth-child(2) {
+            border-color: transparent transparent transparent rgba(243,107,245,0.6);
+            -webkit-transform: rotateY(90deg) rotateZ(60deg) rotateX(180deg) translateY(-400px);
+            -moz-transform:    rotateY(90deg) rotateZ(60deg) rotateX(180deg) translateY(-400px);
+            -ms-transform:     rotateY(90deg) rotateZ(60deg) rotateX(180deg) translateY(-400px);
+            transform:         rotateY(90deg) rotateZ(60deg) rotateX(180deg) translateY(-400px);
+        }
+
+        #pyramid > div:nth-child(3) {
+            border-color: transparent transparent transparent rgba(243,107,245,0.9);
+            -webkit-transform: rotateX(60deg) rotateY(19.5deg);
+            -moz-transform:    rotateX(60deg) rotateY(19.5deg);
+            -ms-transform:     rotateX(60deg) rotateY(19.5deg);
+            transform:         rotateX(60deg) rotateY(19.5deg);
+        }
+
+        #pyramid > div:nth-child(4) {
+            border-color: transparent transparent transparent rgba(243,107,245,0.8);
+            -webkit-transform: rotateX(-60deg) rotateY(19.5deg) translateX(-116px) translateY(-200px) translateZ(326px);
+            -moz-transform:    rotateX(-60deg) rotateY(19.5deg) translateX(-116px) translateY(-200px) translateZ(326px);
+            -ms-transform:     rotateX(-60deg) rotateY(19.5deg) translateX(-116px) translateY(-200px) translateZ(326px);
+            transform:         rotateX(-60deg) rotateY(19.5deg) translateX(-116px) translateY(-200px) translateZ(326px);
+        }
+    </style>
+</head>
+<body>
+    <h1>xLaming</h1>
+    <div class="lightning"></div>
+    <div class="smoke"></div>
+    <div class="static"></div>
+    <div class="mountain"></div>
+
+    <div id="floor">
+    <div class="floorInner">
+        <ul class="horizontal">
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>  
+        <ul class="vertical">
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+    </div>
+    </div>
+
+    <div class="pyramidWrap">
+        <section id="pyramid">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+        </section>
+    </div>
+</body>
+</html>
