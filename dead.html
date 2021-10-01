@@ -20,8 +20,15 @@
       border-radius: 112px;
       left: 150px;
       top: 150px;
-      margin-left: -107px; /* don't know why 107 ? */
+      margin-left: -107px;
       margin-top: -112px;
+    }
+     .vertical-center {
+      margin: 0;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
     }
     .bar, .overbar {
       position: absolute;
@@ -60,18 +67,20 @@
     </style>
   </head>
   <body>
-      <div class="base">
-        <div class="circle"></div>
-        <div class="bar n0"><li></li></div>
-        <div class="bar n1"><li></li></div>
-        <div class="bar n2"><li></li></div>
-        <div class="bar n3"><li></li></div>
-        <div class="bar n4"><li></li></div>
-        <div class="overbar n0"><li></li></div>
-        <div class="overbar n1"><li></li></div>
-        <div class="overbar n2"><li></li></div>
-        <div class="overbar n3"><li></li></div>
-        <div class="overbar n4"><li></li></div>
+      <div class="vertical-center">
+        <div class="base">
+          <div class="circle"></div>
+          <div class="bar n0"><li></li></div>
+          <div class="bar n1"><li></li></div>
+          <div class="bar n2"><li></li></div>
+          <div class="bar n3"><li></li></div>
+          <div class="bar n4"><li></li></div>
+          <div class="overbar n0"><li></li></div>
+          <div class="overbar n1"><li></li></div>
+          <div class="overbar n2"><li></li></div>
+          <div class="overbar n3"><li></li></div>
+          <div class="overbar n4"><li></li></div>
+        </div>
       </div>
   </body>
 </html>
