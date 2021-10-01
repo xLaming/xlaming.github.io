@@ -1,0 +1,77 @@
+<!doctype html>
+<html>
+  <head>
+    <style>
+    body {
+      background: #100;
+    }
+    .base {
+      width: 300px;
+      height: 300px;
+      position: relative;
+      margin: 0 auto;
+      top: 50px;
+    }
+    .circle {
+      position: absolute;
+      width: 200px;
+      height: 200px;
+      border: 12px solid #500;
+      border-radius: 112px;
+      left: 150px;
+      top: 150px;
+      margin-left: -107px; /* don't know why 107 ? */
+      margin-top: -112px;
+    }
+    .bar, .overbar {
+      position: absolute;
+      height: 200px;
+      width: 10px;
+      left: 150px;
+      top: 50px;
+    }
+
+    li {
+      list-style-type: none;
+      height: 200px;
+      width: 20px;
+      margin-left: 30px;
+      width: 10px;
+      background: #500;
+      border-left: 2px solid transparent;
+      border-right: 2px solid transparent;
+    }
+
+    .overbar li {
+      margin-top: 50px;
+      margin-left: 28px;
+      height: 50px;
+      width: 14px;
+      background: #500;
+      border-left: 2px solid #100;
+      border-right: 2px solid #100;
+    }
+
+    .n0 { -webkit-transform: rotate(90deg); }
+    .n1 { -webkit-transform: rotate(162deg); }
+    .n2 { -webkit-transform: rotate(234deg); }
+    .n3 { -webkit-transform: rotate(306deg); }
+    .n4 { -webkit-transform: rotate(378deg); }
+    </style>
+  </head>
+  <body>
+      <div class="base">
+        <div class="circle"></div>
+        <div class="bar n0"><li></li></div>
+        <div class="bar n1"><li></li></div>
+        <div class="bar n2"><li></li></div>
+        <div class="bar n3"><li></li></div>
+        <div class="bar n4"><li></li></div>
+        <div class="overbar n0"><li></li></div>
+        <div class="overbar n1"><li></li></div>
+        <div class="overbar n2"><li></li></div>
+        <div class="overbar n3"><li></li></div>
+        <div class="overbar n4"><li></li></div>
+      </div>
+  </body>
+</html>
